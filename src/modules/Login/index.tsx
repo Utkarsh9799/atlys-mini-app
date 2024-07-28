@@ -1,0 +1,15 @@
+import React from "react";
+import Form from "../shared/Form";
+
+import LoginAsset from './assets/login-logo.png';
+
+const Login = () => {
+    return (
+        <div className="w-full h-full flex flex-col items-center justify-center">
+            <img src={LoginAsset} alt="Login" width={40} className="mb-12" />
+            <Form />
+        </div>
+    );
+}
+
+export default Login;
