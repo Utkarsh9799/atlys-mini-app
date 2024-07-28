@@ -1,6 +1,6 @@
-import React from "react";
+import { InputHTMLAttributes } from "react";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   label?: string;
   // for use cases like forgot your password cta
@@ -19,6 +19,7 @@ const Input = (props: InputProps) => {
         {label ? <div className="text-title text-sm mb-2">{label}</div> : null}
         {action ? (
           <button
+            type="button"
             onClick={action.callback}
             className="text-[12px] text-title hover:cursor-pointer"
           >
