@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Post from "../shared/Post";
-import TextArea from "../../components/TextArea";
-import Button from "../../components/Button";
 import { DUMMY_POSTS } from "./dummyPosts";
 import { ChatBubble, Dots } from "./assets/icons";
+import PostEditor from "./PostEditor";
+import TextAreaWithEmoji from "../../components/TextAreaWithEmoji";
 
 const Home = () => {
-  const [posts, setPosts] = useState(DUMMY_POSTS);
+  const [posts] = useState(DUMMY_POSTS);
+
+  const handleActionClick = () => {};
 
   return (
     <div className="w-full min-h-full flex flex-col items-center py-16">
@@ -19,19 +21,10 @@ const Home = () => {
       </header>
       <main className="w-1/2 mt-10">
         <section>
-          <Post>
-            <h4 className="text-title text-lg">Create post</h4>
-            <TextArea
-              className="my-4"
-              placeholder="How are you feeling today?"
-            />
-            <div className="flex justify-end">
-              <Button>Post</Button>
-            </div>
-          </Post>
+          <PostEditor handlePostClick={handleActionClick} />
         </section>
         <section>
-          {posts.map(({ author, content, createdAt, comments }, i) => (
+          {posts.map(({ author, content, createdAt, comments, emoji }, i) => (
             <Post key={i} className="mt-4">
               <div className="flex justify-between items-center">
                 <div className="flex">
@@ -46,13 +39,18 @@ const Home = () => {
                     <p className="text-subtitle text-sm">{createdAt}</p>
                   </div>
                 </div>
-                <div className="hover:cursor-pointer">
+                <div className="hover:cursor-pointer" onClick={handleActionClick}>
                   <Dots />
                 </div>
               </div>
-              <TextArea value={content} disabled className="mt-5" />
+              <TextAreaWithEmoji
+                value={content}
+                emoji={emoji}
+                disabled
+                className="mt-5"
+              />
               <div className="flex mt-3">
-                <div className="flex">
+                <div className="flex hover:cursor-pointer" onClick={handleActionClick}>
                   <ChatBubble />
                   {comments?.length ? (
                     <span className="text-subtitle ml-2 text-sm">
