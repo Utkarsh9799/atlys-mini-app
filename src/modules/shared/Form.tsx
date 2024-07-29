@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Cross } from "./assets/icons";
+import { Cross, EyeIcon } from "./assets/icons";
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -14,6 +14,7 @@ interface FormProps {
 const Form: React.FC<FormProps> = (props) => {
   const { isLoginFlow = false, closeForm } = props;
   const [loginFlow, setLoginFlow] = useState(isLoginFlow);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,6 +24,10 @@ const Form: React.FC<FormProps> = (props) => {
     } else {
       closeForm?.();
     }
+  };
+
+  const handlePasswordToggle = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -60,24 +65,31 @@ const Form: React.FC<FormProps> = (props) => {
               />
             </React.Fragment>
           )}
-          <Input
-            label="Password"
-            placeholder={
-              loginFlow ? "Enter your password" : "Choose a strong password"
-            }
-            className="mt-4"
-            type="password"
-            action={
-              loginFlow
-                ? {
-                    actionText: "Forgot password?",
-                    callback: () => {
-                      // Handle pswd reset here
-                    },
-                  }
-                : undefined
-            }
-          />
+          <div className="mt-4 relative">
+            <Input
+              label="Password"
+              placeholder={
+                loginFlow ? "Enter your password" : "Choose a strong password"
+              }
+              type={showPassword ? "text" : "password"}
+              action={
+                loginFlow
+                  ? {
+                      actionText: "Forgot password?",
+                      callback: () => {
+                        // Handle pswd reset here
+                      },
+                    }
+                  : undefined
+              }
+            />
+            <div
+              className="absolute top-10 right-3 hover:cursor-pointer"
+              onClick={handlePasswordToggle}
+            >
+              <EyeIcon />
+            </div>
+          </div>
           <Button fullWidth type="submit" className="mt-5">
             {loginFlow ? "Login Now" : "Continue"}
           </Button>
