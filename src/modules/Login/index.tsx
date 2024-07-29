@@ -6,8 +6,8 @@ const Login = () => {
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">
       <img src={LoginAsset} alt="Login" width={40} className="mb-12" />
-      <div className="w-1/3">
-        <Form isLoginFlow />
+      <div className="w-5/6 sm:w-2/3 lg:w-1/3">
+        <Form isLoginFlow authPage />
       </div>
     </div>
   );

@@ -8,18 +8,19 @@ import Button from "../../components/Button";
 
 interface FormProps {
   isLoginFlow?: boolean;
+  authPage?: boolean;
   closeForm?: () => void;
 }
 
 const Form: React.FC<FormProps> = (props) => {
-  const { isLoginFlow = false, closeForm } = props;
+  const { isLoginFlow = false, authPage = false, closeForm } = props;
   const [loginFlow, setLoginFlow] = useState(isLoginFlow);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (loginFlow) {
+    if (authPage) {
       navigate("/home");
     } else {
       closeForm?.();
@@ -41,7 +42,7 @@ const Form: React.FC<FormProps> = (props) => {
         </button>
       ) : null}
       <div className="bg-[#27292D] px-6 py-10 rounded-lg">
-        <h6 className="text-subtitle uppercase text-sm">
+        <h6 className="text-subtitle uppercase text-sm tracking-wider">
           {loginFlow ? "Welcome back" : "Sign up"}
         </h6>
         <h5 className="text-white text-lg mt-2 mb-10">
@@ -97,7 +98,7 @@ const Form: React.FC<FormProps> = (props) => {
         <div className="text-subtitle mt-3 text-start text-sm">
           {loginFlow ? "Not registered yet? " : "Already have an account? "}
           <button
-            className="text-white"
+            className="text-title"
             onClick={() => setLoginFlow((prev) => !prev)}
           >
             {loginFlow ? "Register" : "Login"} &rarr;

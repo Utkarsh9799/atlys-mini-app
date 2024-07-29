@@ -11,11 +11,11 @@ import TextAreaWithEmoji from "../../components/TextAreaWithEmoji";
 import Modal from "../../components/Modal";
 
 const Header = () => (
-  <header className="w-1/2">
+  <header className="w-4/5 sm:2/3 lg:w-1/2">
     <h1 className="text-title text-[28px]">Hello Jane</h1>
     <p className="text-subtitle">
-      How are you doing today? Would you like to share something with <br />
-      the community 🤗
+      How are you doing today? Would you like to share something with <br /> the
+      community 🤗
     </p>
   </header>
 );
@@ -27,27 +27,28 @@ const MainContent = ({
   posts: typeof DUMMY_POSTS;
   onActionClick: () => void;
 }) => (
-  <main className="w-1/2 mt-10">
+  <main className="w-4/5 sm:2/3 lg:w-1/2 mt-10">
     <section>
       <PostEditor handlePostClick={onActionClick} />
     </section>
     <section>
       {posts.map(({ author, content, createdAt, comments, emoji }, i) => (
-        <Post key={i} className="mt-4">
-          <PostHeader
-            profileImg={author.profileImg}
-            authorName={author.name}
-            createdAt={createdAt}
-            onActionClick={onActionClick}
-          />
-          <TextAreaWithEmoji
-            value={content}
-            emoji={emoji}
-            disabled
-            className="mt-5"
-          />
-          <PostFooter comments={comments} onActionClick={onActionClick} />
-        </Post>
+        <div key={i} className="mt-4" onClick={onActionClick}>
+          <Post className="hover:cursor-pointer">
+            <PostHeader
+              profileImg={author.profileImg}
+              authorName={author.name}
+              createdAt={createdAt}
+            />
+            <TextAreaWithEmoji
+              value={content}
+              emoji={emoji}
+              disabled
+              className="mt-5"
+            />
+            <PostFooter comments={comments} />
+          </Post>
+        </div>
       ))}
     </section>
   </main>
@@ -57,12 +58,10 @@ const PostHeader = ({
   profileImg,
   authorName,
   createdAt,
-  onActionClick,
 }: {
   profileImg: string;
   authorName: string;
   createdAt: string | number;
-  onActionClick: () => void;
 }) => (
   <div className="flex justify-between items-center">
     <div className="flex">
@@ -72,29 +71,15 @@ const PostHeader = ({
         <p className="text-subtitle text-sm">{createdAt}</p>
       </div>
     </div>
-    <div
-      className="hover:cursor-pointer"
-      onClick={onActionClick}
-      role="button"
-    >
+    <div className="hover:cursor-pointer" role="button">
       <Dots />
     </div>
   </div>
 );
 
-const PostFooter = ({
-  comments,
-  onActionClick,
-}: {
-  comments?: { content: string }[];
-  onActionClick: () => void;
-}) => (
+const PostFooter = ({ comments }: { comments?: { content: string }[] }) => (
   <div className="flex mt-3">
-    <div
-      className="flex hover:cursor-pointer"
-      onClick={onActionClick}
-      role="button"
-    >
+    <div className="flex hover:cursor-pointer" role="button">
       <ChatBubble />
       {comments?.length ? (
         <span className="text-subtitle ml-2 text-sm">

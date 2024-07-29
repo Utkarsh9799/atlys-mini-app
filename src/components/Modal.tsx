@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = (props) => {
     open ? "opacity-100 bg-[#00000080]" : "opacity-0 bg-transparent invisible"
   }`;
 
-  const contentClasses = `w-1/3 rounded-lg shadow p-6 transition-all duration-500 ${
+  const contentClasses = `w-5/6 sm:2/3 lg:w-1/3 rounded-lg shadow p-6 transition-all duration-500 ${
     open ? "opacity-100" : "opacity-0"
   }`;
 
