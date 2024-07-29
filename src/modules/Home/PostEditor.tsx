@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import Post from "../shared/Post";
+
 import TextAreaWithEmoji from "../../components/TextAreaWithEmoji";
 import Button from "../../components/Button";
 

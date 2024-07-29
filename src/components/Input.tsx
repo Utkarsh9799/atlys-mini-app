@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
@@ -10,8 +10,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   };
 }
 
-const Input = (props: InputProps) => {
-  const { type, label, action, className, ...propsToFwd } = props;
+const Input: React.FC<InputProps> = (props) => {
+  const { type = "text", label, action, className, ...propsToFwd } = props;
 
   return (
     <div className={`${className ?? ""} w-full`}>

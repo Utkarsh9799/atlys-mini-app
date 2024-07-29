@@ -1,15 +1,20 @@
 import EmojiPicker from "@emoji-mart/react";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 
-interface TextAreaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   emoji: string;
   isEditMode?: boolean;
   updateEmoji?: React.Dispatch<React.SetStateAction<string>>;
   className?: string;
 }
 
-const TextAreaWithEmoji = (props: TextAreaProps) => {
-  const { className, isEditMode = false, emoji, updateEmoji, ...propsToFwd } = props;
+const TextAreaWithEmoji: React.FC<TextAreaProps> = ({
+  className,
+  isEditMode = false,
+  emoji,
+  updateEmoji,
+  ...propsToFwd
+}) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState(emoji);
 
@@ -26,15 +31,29 @@ const TextAreaWithEmoji = (props: TextAreaProps) => {
     }
   };
 
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    if (propsToFwd.onChange) {
+      propsToFwd.onChange(e);
+    }
+  };
+
+  const containerClasses = `w-full relative ${className ?? ""}`;
+  const emojiButtonClasses = `absolute top-[20%] left-10 -translate-x-1/2 h-12 w-12 rounded-full bg-[#27292D] hover:cursor-pointer flex items-center justify-center`;
+  const textareaClasses = "w-full bg-[#191920] p-4 pl-20 rounded-lg resize-none text-title focus:outline-none placeholder-subtitle";
+
   return (
-    <div className={`${className ?? ""} w-full relative`}>
+    <div className={containerClasses}>
       <textarea
         {...propsToFwd}
-        className="w-full bg-[#191920] p-4 pl-20 rounded-lg resize-none text-title focus:outline-none placeholder-subtitle"
+        className={textareaClasses}
+        value={propsToFwd.value} // Ensure controlled component
+        onChange={handleChange}
       />
       <div
         onClick={handleEmojiPickerClick}
-        className="absolute top-[20%] left-10 -translate-x-1/2 h-12 w-12 rounded-full bg-[#27292D] hover:cursor-pointer flex items-center justify-center"
+        className={emojiButtonClasses}
+        role="button"
+        tabIndex={0}
       >
         {showEmojiPicker ? (
           <EmojiPicker onEmojiSelect={handleEmojiSelection} />

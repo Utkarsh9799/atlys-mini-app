@@ -1,6 +1,7 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Page404 } from "./modules/404";
 import Home from "./modules/Home";
 import Login from "./modules/Login";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="*" element={<div>404</div>} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
     </div>

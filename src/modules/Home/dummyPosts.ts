@@ -6,7 +6,7 @@ export interface PostDetails {
     name: string;
     profileImg: string;
   };
-  createdAt: number | string; // epoch Date
+  createdAt: number | string; // can use epoch Date or ISO
   emoji: string;
   content: string;
   comments?: {
