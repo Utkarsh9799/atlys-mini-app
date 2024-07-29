@@ -6,7 +6,7 @@ export interface PostDetails {
     name: string;
     profileImg: string;
   };
-  createdAt: number; // epoch Date
+  createdAt: number | string; // epoch Date
   emoji: string;
   content: string;
   comments?: {
@@ -20,18 +20,18 @@ export const DUMMY_POSTS: PostDetails[] = [
       name: "Theresa Webb",
       profileImg: Author1,
     },
-    createdAt: 1722182824911,
+    createdAt: '8 mins ago',
     emoji: '🤩',
     content:
       "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-    comments: [{ content: "" }, { content: "" }, { content: "" }],
+    comments: [{ content: "" }],
   },
   {
     author: {
       name: "Marvin McKinney",
       profileImg: Author2,
     },
-    createdAt: 1722182824911,
+    createdAt: '11:35pm, 28th Jul',
     emoji: '🥳',
     content:
       "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
